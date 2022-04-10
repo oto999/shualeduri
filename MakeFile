@@ -1,0 +1,30 @@
+#
+#
+#
+CC=gcc
+CFLAGS=-Wall 
+
+
+all : secondLongestEmpty
+.PHONY : all
+
+secondLongestEmpty : punctCount.o copy.o main.o
+	$(CC) $(CFLAGS) -o secondLongestEmpty copy.o main.o
+	
+copy.o : copy.c 
+	$(CC) -Wall -c -o copy.o copy.c
+
+main.o : main.c 
+	$(CC) -Wall -c -o main.o main.c
+	
+	
+debug:clean getline.c copy.c main.c
+	$(CC) -Wall -g -o test copy.c main.c 
+	gdb -tui  test
+
+	
+	
+.PHONY: clean
+clean : 
+	rm -rf *.o 
+	
