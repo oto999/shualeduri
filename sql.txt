@@ -1,0 +1,59 @@
+package org.example;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+class SelectMain {
+    public static void main(String[] args) {
+        try {
+            // 1. Get a Connection to Database
+            String connectionString = "jdbc:h2:tcp://localhost/~/test";
+            String username = "sa";
+            String pwd = "123";
+
+            Connection myConn = DriverManager.getConnection(connectionString, username, pwd);
+            Statement myStatement = myConn.createStatement();
+//
+//            // 2. Create Statement
+//            Statement myStatement = myConn.createStatement();
+//
+//            // 3. Execute SQL Query
+//            String query = "INSERT INTO PERSON(ID,NAME,SURNAME,AGE) VALUES('1','FGDF','DFGD','1');";
+//            String updateQuery = "UPDATE PERSON SET ID ='5', NAME='445432', SURNAME='ASDASF', AGE='999' WHERE ID='1';";
+//            String deleteQuery = "DELETE FROM PERSON WHERE ID=1";
+//            myStatement.executeUpdate(updateQuery);
+//            ResultSet myResultSet = myStatement.executeQuery("select * from person");
+//
+//            // 4. process the result set
+//            while (myResultSet.next()) {
+//                System.out.println(myResultSet.getString("id") + " " + myResultSet.getString("name") + " "+ myResultSet.getString("surname") +" "+ myResultSet.getString("age") );
+//            }
+            Student student = new Student(3, "sdfs", "fsdfs", "sdfsdf");
+            student.Create(myStatement);
+
+            Student newStudent = new Student(7, "xcsdfsdf", "fsdfsdf", "ssdfsfsgs");
+            newStudent.UpdateByID(myStatement, student.id);
+
+//            String deleteAll = "DELETE FROM STUDENT WHERE ID='3'";
+//            String deleteAll2 = "DELETE FROM STUDENT WHERE ID='7'";
+//            myStatement.execute(deleteAll2);
+//            myStatement.execute(deleteAll);
+            student.FindMe(myStatement);
+            newStudent.FindMe(myStatement);
+
+
+
+
+
+
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
